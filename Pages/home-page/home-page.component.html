@@ -1,0 +1,134 @@
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h1 class="display-4">Welcome</h1>
+  <p class="lead">You can order Pizza's from a wide variety,Will be delivered to your doorstep</p>
+  <br><br><br><br><br><br>
+  <button type="button" class="btn btn-info" (click)="openModal(template)" data-backdrop="static" data-keyboard="false">Order Online</button>
+</div>
+<!--Menu Modal -->
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Margherita Pizza</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="alert alert-danger" *ngIf="maxerror">Maximum Quantiy,Please remove some of them.</div>
+    <div>
+      <h6><strong>Size</strong> (You can choose Only One)</h6>
+      <div *ngFor="let menu of Menu[0].Base;let i = index">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="radio">
+              <label class="radio-inline control-label"><input type="checkbox" name="optradio" [value]="menu.price"
+                  (change)="onCrustChange(menu,$event,i)"  [checked]="saved" > {{menu.name}}</label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <p class="float-right">{{menu.price | currency: 'INR'}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h6><strong>Extra Toppings</strong> (You can choose upto 3 Options)</h6>
+      <div *ngFor="let menu of Menu[0].Toppings;let i = index">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="radio">
+              <label class="checkbox-inline"><input type="checkbox" [value]="menu.price" (change)="onTopplingAdd(menu,$event,i)" [checked]="selectedOrder === menu.name" >
+                {{menu.name}}</label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <p class="float-right">{{menu.price | currency: 'INR'}}</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h6><strong>Veggies</strong> (You can choose Upto 5)</h6>
+        <div *ngFor="let menu of Menu[0].Veggies;let i = index">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="radio">
+                <label class="radio-inline control-label"><input type="checkbox" name="optradio" [value]="menu.price"
+                    (change)="onVeggiesAdd(menu,$event,i)" [checked]="selectedOrder === menu.name"> {{menu.name}}</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <p class="float-right">{{menu.price | currency: 'INR'}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h6><strong>Cheese</strong> (You can choose Only One)</h6>
+        <div *ngFor="let menu of Menu[0].Cheese;let i = index">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="radio">
+                <label class="radio-inline control-label"><input type="checkbox" name="optradio" [value]="menu.price"
+                    (change)="onCheeseAdd(menu,$event,i)" > {{menu.name}}</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <p class="float-right">{{menu.price | currency: 'INR'}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h6><strong>Sauces</strong> (No Limit)</h6>
+        <div *ngFor="let menu of Menu[0].Sauces;let i = index">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="radio">
+                <label class="radio-inline control-label"><input type="checkbox" name="optradio" [value]="menu.price"
+                    (change)="onSaucesAdd(menu,$event,i)" > {{menu.name}}</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <p class="float-right">{{menu.price | currency: 'INR'}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h6><strong>Sides & Desserts</strong> (No Limit)</h6>
+        <div *ngFor="let menu of Menu[0].Sides;let i = index">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="radio">
+                <label class="radio-inline control-label"><input type="checkbox" name="optradio" [value]="menu.price"
+                    (change)="onSidesAdd(menu,$event,i)" > {{menu.name}}</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <p class="float-right">{{menu.price | currency: 'INR'}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h6><strong>Extras</strong> (No Limit)</h6>
+        <div *ngFor="let menu of Menu[0].Extras;let i = index">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="radio">
+                <label class="radio-inline control-label"><input type="checkbox" name="optradio" [value]="menu.price"
+                    (change)="onExtrasAdd(menu,$event,i)" > {{menu.name}}</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <p class="float-right">{{menu.price | currency: 'INR'}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <p style="margin-top:1rem">{{totalPrice | currency: 'INR'}}</p>
+    <button type="button" class="btn btn-success" (click)="Add()" [disabled]="valid">Add to Cart</button>
+  </div>
+</ng-template>
