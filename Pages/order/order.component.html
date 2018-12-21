@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="alert alert-success" *ngIf='OrderSuccess'>Order Placed succesfully,Thankyou for ordering.</div>
+  <div class="card">
+    <div class="card-body">
+      You have order a pizza with below Items:
+      <br>
+      <div class="row" *ngFor="let item of CurrentOrder;let i = index">
+        <div class="col-md-6">{{item.name}}</div>
+        <div class="col-md-6">{{item.price | currency : 'INR' }}</div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-6">Total Price</div>
+        <div class="col-md-6">{{totalPrice}}
+          <button type="submit" (click)="order()" class="btn btn-success btn-sm float-right ">Order now</button>
+        </div>
+      </div>
+      <div class="row" *ngIf="success">
+            <div class="col-md-6">Discount Price</div>
+            <div class="col-md-6">- {{discountPrice}}
+            </div>
+          </div>
+          <hr>
+          <div class="row" *ngIf="success">
+                <div class="col-md-6">FInal Price</div>
+                <div class="col-md-6">{{FinalPrice}}
+                </div>
+              </div>
+    </div>
+    <br>
+    <p style="margin-left:10px">Promocode</p>
+    <div class="form-group col-md-6">
+      <input type="text" [(ngModel)]="CouponCode" class="form-control" placeholder="Enter Promocode" [disabled]="success">
+      <br>
+      <div *ngIf="success" class="alert alert-success">Code Applied succesfully</div>
+      <div *ngIf="error" class="alert alert-danger">Code not valid</div>
+      <br>
+      <button type="submit" (click)="submit()" class="btn btn-primary btn-sm float-right" [disabled]="success">Apply</button>
+    </div>
+  </div>
