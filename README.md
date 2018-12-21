@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # OnlineOrdering
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.3.
@@ -30,5 +29,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 # Online-Order
 You can install this project with npm install
 Run the app by using ng serve --open command
-and you can order by selecting from the menu
->>>>>>> d456cb34ae2037c4a1549973b6ba3dcbdad1c5d5
+
